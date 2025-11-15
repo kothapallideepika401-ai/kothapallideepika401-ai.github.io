@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C Memory & Recursion Learning</title>
+    <link rel="stylesheet" href="/css/learn.css">
+</head>
+<body>
+<style>
+  :root {
+    --primary-color: #FFD700;
+    --secondary-color: #55d755;
+
+    --hero-gradient-start: #00a8cc;
+    --hero-gradient-end: #00d9ff;
+
+    --color-bg: #0f1419;
+    --color-text: #e0e6ed;
+    --color-white: #ffffff;
+
+    --color-sky: #00d9ff;
+    --color-sky-dark: #00a8cc;
+    --color-sky-light: #1a1f2e;
+    --color-accent: #00d9ff;
+
+    --color-gray-light: #252d3d;
+    --color-gray-border: #2a3240;
+    --color-footer: #ffffff;
+
+    --success: #10b981;
+    --error: #ef4444;
+    --warning: #f59e0b;
+  }
+
+  /* Navigation Bar */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--color-footer);
+    padding: 0 2rem;
+    color: var(--color-white);
+    flex-wrap: wrap;
+    z-index: 1000;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .logo-images {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .nav-logo {
+    width: 100px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 5px;
+    background-color: var(--color-white);
+    padding: 2px;
+  }
+
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-left: 0.5rem;
+  }
+
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+    margin: 0;
+  }
+
+  .nav-links a {
+    color: var(--color-white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-sky);
+  }
+
+  .auth-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .auth-buttons button {
+    padding: 0.5rem 1rem;
+    background-color: var(--color-sky);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    color: var(--color-text);
+  }
+
+  .back-icon {
+    font-size: 1.5rem;
+    text-decoration: none;
+    color: var(--color-white);
+    background-color: var(--color-sky-light);
+    padding: 0.4rem 0.6rem;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+  }
+
+  .back-icon:hover {
+    background-color: var(--color-gray-light);
+  }
+  .gradient-text {
+  background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+</style>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/index.htm" class="back-icon" title="Go to Home">🔙</a>
+    <div class="logo-images">
+      <img src="/images/anurag.png" alt="College Logo" class="nav-logo" />
+      <img src="/images/IUCEE-Foundation.png" alt="Sponsor Logo" class="nav-logo" />
+    </div>
+    <h2 class="gradient-text">EduAIthon</h2>
+  </div>
+</nav>
+
+    <div class="container">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">C Learn Pro</h2>
+                <p class="sidebar-subtitle">Memory & Recursion</p>
+            </div>
+            <!-- Reduced to 2 topics: Pointers and Recursion -->
+            <nav class="sidebar-nav">
+                <button class="nav-item active" data-topic="pointers">
+                    <span class="nav-icon">🎯</span>
+                    <span>Pointers & Memory</span>
+                </button>
+                <button class="nav-item" data-topic="recursion">
+                    <span class="nav-icon">🔄</span>
+                    <span>Recursion</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="content">
+            <!-- Topic Header -->
+            <div class="topic-header">
+                <h1 class="topic-title" id="topicTitle">Pointers & Memory</h1>
+                <p class="topic-description" id="topicDescription">Understand memory addresses and how pointers reference data</p>
+            </div>
+
+            <!-- Memory Visualization Section -->
+            <section class="visualization-section">
+                <h3 class="section-header"><span>🧠</span> Memory Visualization</h3>
+                <div class="memory-visualizer" id="memoryVisualizer"></div>
+            </section>
+
+            <!-- Code Editor Section -->
+            <section class="code-section">
+                <h3 class="section-header"><span>💻</span> Code Editor</h3>
+                <div class="code-editor-wrapper">
+                    <textarea class="code-editor" id="codeEditor" placeholder="Write your C code here..."></textarea>
+                </div>
+                <div class="code-controls">
+                    <button class="btn btn-primary" id="visualizeBtn">👁️ Visualize Memory</button>
+                    <button class="btn btn-secondary" id="resetBtn">🔄 Reset</button>
+                </div>
+                <div class="output-section">
+                    <h4>Execution Output:</h4>
+                    <div class="output-console" id="output">
+                        <p class="output-placeholder">Click "Visualize Memory" to see output...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Explanation Section -->
+            <section class="explanation-section">
+                <h3 class="section-header"><span>🤖</span> AI Explanation</h3>
+                <button class="btn btn-secondary" id="explainBtn">✨ Explain with AI</button>
+                <div id="explanationBox" class="explanation-box hidden">
+                    <div id="explanationText" class="explanation-text"></div>
+                </div>
+            </section>
+
+            <!-- Coming Soon Features -->
+            <section class="features-section">
+                <h3 class="section-header"><span>🚀</span> Learning Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card coming-soon">
+                        <div class="coming-soon-badge">Coming Soon</div>
+                        <h4>📊 Interactive Challenges</h4>
+                        <p>Solve real-world pointer and recursion problems</p>
+                    </div>
+                    <div class="feature-card coming-soon">
+                        <div class="coming-soon-badge">Coming Soon</div>
+                        <h4>🎯 Step-by-Step Debugger</h4>
+                        <p>Trace through code execution line by line</p>
+                    </div>
+                    <div class="feature-card coming-soon">
+                        <div class="coming-soon-badge">Coming Soon</div>
+                        <h4>❓ Interactive Quiz</h4>
+                        <p>Test your understanding of core concepts</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/js/learn.js"></script>
+</body>
+</html>
