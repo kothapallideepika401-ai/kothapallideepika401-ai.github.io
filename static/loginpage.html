@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master C Programming Login</title>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        background: #e8f3f1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        width: 900px;
+        height: 520px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        box-shadow: 0 4px 18px rgba(0,0,0,0.2);
+        overflow: hidden;
+    }
+
+    /* LEFT SECTION */
+    .left {
+        width: 50%;
+        background: #8cc7c1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 30px;
+        text-align: center;
+    }
+
+    .left img {
+        width: 75%;
+        height: auto;
+        border-radius: 12px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+    }
+
+    .left h3 {
+        color: white;
+        margin-top: 10px;
+        font-size: 22px;
+    }
+
+    .left p {
+        color: white;
+        width: 80%;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    /* RIGHT SECTION */
+    .right {
+        width: 50%;
+        padding: 50px;
+    }
+
+    .right h1 {
+        font-size: 28px;
+        margin-bottom: 5px;
+        color: #333;
+    }
+
+    .right p {
+        margin-bottom: 25px;
+        color: #666;
+    }
+
+    .input-group {
+        margin-bottom: 18px;
+        position: relative;
+    }
+
+    label {
+        font-size: 14px;
+        color: #444;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+
+    input:focus {
+        border-color: #2d5a73;
+        outline: none;
+    }
+
+    .togglePassword {
+        position: absolute;
+        right: 12px;
+        top: 45px;
+        cursor: pointer;
+        font-size: 18px;
+        color: #777;
+    }
+
+    .forgot {
+        text-align: right;
+        margin-top: -8px;
+        margin-bottom: 20px;
+    }
+
+    .forgot a {
+        font-size: 13px;
+        color: #2d5a73;
+        text-decoration: none;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        background: #2d5a73;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    .btn:hover {
+        background: #234457;
+    }
+
+    .google {
+        text-align: center;
+        margin: 18px 0;
+        color: #666;
+        cursor: pointer;
+    }
+
+    .signup {
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+    }
+
+    .signup a {
+        color: #2d5a73;
+        font-weight: bold;
+        text-decoration: none;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="left">
+        <img src="images/loginpic.jpg" alt="Login Illustration">
+        <h3>Welcome Back!</h3>
+        <p>Learn, practice, and master C programming with interactive AI support.</p>
+    </div>
+
+    <div class="right">
+        <h1>C Learn with AI</h1>
+        <p>Welcome To Master C Programming</p>
+
+        <div class="input-group">
+            <label>Username or Email</label>
+            <input type="text" id="username" placeholder="enter user name" required>
+        </div>
+
+        <div class="input-group">
+            <label>Password</label>
+            <input type="password" id="password" placeholder="enter password" required>
+            <span class="togglePassword" onclick="togglePassword()">👁</span>
+        </div>
+
+        <div class="forgot">
+            <a href="resetpassword.html">Forgot password?</a>
+        </div>
+
+        <button class="btn" onclick="login()">Login</button>
+
+        <div class="google" onclick="googleLogin()">or<br><br>Sign In With Google</div>
+
+        <div class="signup">
+            don't have an account? <a href="register.html">Create Account</a>
+        </div>
+    </div>
+
+</div>
+
+<script>
+function togglePassword() {
+    const password = document.getElementById("password");
+    password.type = password.type === "password" ? "text" : "password";
+}
+
+function login() {
+    let username = document.getElementById("username").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    if (username === "" || password === "") {
+        alert("Please fill in both fields");
+        return;
+    }
+
+    window.location.href = "learn.html"; // redirect to home page
+}
+
+function googleLogin() {
+    window.location.href = "https://accounts.google.com/signin";
+}
+</script>
+
+</body>
+</html>

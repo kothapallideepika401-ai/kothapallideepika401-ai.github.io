@@ -10,18 +10,18 @@
   --secondary-color: #55d755;       /* Green for gradient text */
 
   /* Core Theme Colors */
-  --color-bg: #0f1419;              /* Dark background */
+  --color-bg: #000000;              /* Dark background */
   --color-text: #fdfdfd;            /* Light text for readability */
-  --color-white: #00d9ff;
+  --color-white: #117791;
 
   /* Accent Colors */
-  --color-sky: #00d9ff;             /* Primary accent */
+  --color-sky: #187b8d;             /* Primary accent */
   --color-sky-dark: #000000;        /* Darker accent for nav/footer */
-  --color-sky-light: #0f1419;       /* Card background */
-  --color-accent: #00d9ff;          /* Buttons, highlights */
+  --color-sky-light: #000000;       /* Card background */
+  --color-accent: #187f91;          /* Buttons, highlights */
 
   /* Utility Colors */
-  --color-gray-light: #284e99;      /* Hover/secondary background */
+  --color-gray-light: #791f7c;      /* Hover/secondary background */
   --color-gray-border: #2a3240;     /* Borders, outlines */
   --color-footer: #ffffff;          /* Footer/nav base */
 
@@ -53,7 +53,7 @@ body {
   color: var(--color-white);
   flex-wrap: wrap;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(132, 202, 229, 0.1);
 }
 
 .nav-left {

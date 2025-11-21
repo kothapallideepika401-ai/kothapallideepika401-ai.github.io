@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create Account</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #2e8daa, #434343); /* SAME AS LOGIN PAGE */
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            width: 300px;
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            animation: fadeIn 0.7s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 18px;
+        }
+
+        .input-group label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            margin-top: 6px;
+            border-radius: 10px;
+            border: 1.5px solid #ccc;
+            transition: 0.3s;
+            font-size: 15px;
+        }
+
+        .input-group input:focus {
+            border-color: #4EF0FF;
+            outline: none;
+            box-shadow: 0 0 7px rgba(78,240,255,0.7);
+        }
+
+        /* MINT BLUE REGISTER BUTTON */
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #1b96a1; 
+            border: none;
+            border-radius: 10px;
+            color: #000;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            background: #50b7c0;
+        }
+
+        .google-btn {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            border-radius: 10px;
+            border: 1.5px solid #ccc;
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .google-btn:hover {
+            background: #f2f2f2;
+        }
+
+        .google-btn img {
+            width: 20px;
+        }
+
+        .link {
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .link a {
+            color: #1d6e75;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h2>Create Account</h2>
+
+        <form id="registerForm">
+
+            <div class="input-group">
+                <label>Full Name</label>
+                <input type="text" id="fullname" placeholder="Enter full name" required />
+                <div class="error" id="nameError">Please enter a valid name</div>
+            </div>
+
+            <div class="input-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Choose a username" required />
+                <div class="error" id="userError">Username already exists</div>
+            </div>
+
+            <div class="input-group">
+                <label>Email or Mobile Number</label>
+                <input type="text" id="contact" placeholder="Enter email or phone" required />
+                <div class="error" id="contactError">Enter valid email or 10-digit mobile number</div>
+            </div>
+
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password" required />
+                <div class="error" id="passError">Password must be at least 8 characters with letters, numbers & symbols</div>
+            </div>
+
+            <button class="btn" type="submit">Register</button>
+
+            <button type="button" class="google-btn" onclick="googleSignIn()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg">
+                Sign in with Google
+            </button>
+
+            <div class="link">
+                Already have an account? <a href="loginpage.html">Login</a>
+            </div>
+        </form>
+    </div>
+
+<script>
+function googleSignIn() {
+    window.location.href = "https://mail.google.com";
+}
+
+document.getElementById("registerForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    let fullname = document.getElementById("fullname").value.trim();
+    let username = document.getElementById("username").value.trim();
+    let contact = document.getElementById("contact").value.trim();
+    let password = document.getElementById("password").value.trim();
+
+    let nameError = document.getElementById("nameError");
+    let userError = document.getElementById("userError");
+    let contactError = document.getElementById("contactError");
+    let passError = document.getElementById("passError");
+
+    nameError.style.display = "none";
+    userError.style.display = "none";
+    contactError.style.display = "none";
+    passError.style.display = "none";
+
+    let valid = true;
+
+    if (fullname.length < 3) {
+        nameError.style.display = "block";
+        valid = false;
+    }
+
+    let existingUsers = ["deepika", "admin", "user123"];
+    if (existingUsers.includes(username.toLowerCase())) {
+        userError.style.display = "block";
+        valid = false;
+    }
+
+    let isEmail = contact.includes("@");
+    let isPhone = /^[0-9]{10}$/.test(contact);
+
+    if (!isEmail && !isPhone) {
+        contactError.style.display = "block";
+        valid = false;
+    }
+
+    let passCheck = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/;
+
+    if (!passCheck.test(password)) {
+        passError.style.display = "block";
+        valid = false;
+    }
+
+    if (valid) {
+        alert("Registration Successful! Redirecting to Home Page...");
+        window.location.href = "home.html";  //  <-- CHANGE PAGE NAME HERE
+    }
+});
+</script>
+
+</body>
+</html>
